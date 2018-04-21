@@ -1,0 +1,12 @@
+name: first_platform
+description: |
+  You managed to reach the platform! 
+  Behind you is the bluff. Below you 
+  and to your right is another floating 
+  island. A third floating island 
+  hovers to your left. 
+
+links:
+  platform_right: Jump to the right
+  platform_left: Jump to the left
+  cliff: Jump back to the bluff

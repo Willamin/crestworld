@@ -1,0 +1,11 @@
+name: cliff
+description: |
+  You're standing on the edge of a cliff, 
+  overlooking an ocean. It seems high enough 
+  that you'd perish if you fell. Ahead of 
+  you and a little higher, there's a floating 
+  platform. It appears as though you can 
+  reach if if you jump.
+
+links:
+  first_platform: "Jump to the platform"

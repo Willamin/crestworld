@@ -1,0 +1,15 @@
+name: crestworld
+version: 0.1.0
+license: MIT
+authors:
+  - Will Lewis <will@wflewis.com>
+description: |
+  CrestWorld is a text-based platforming game.
+
+dependencies:
+  crest:
+    path: ../crest
+
+targets:
+  crestworld:
+    main: src/crestworld.cr
