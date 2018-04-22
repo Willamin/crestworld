@@ -19,7 +19,7 @@ module World
       }
     when .nil?, "welcome"
       {
-        "Welcome to Crest World",
+        "Welcome to Crest World, a game created for the 41st Ludum Dare Game Jam. My take on the theme \"combine two incompatible genres\" is a choose-your-own-adventure platformer. <br><br>Have fun!",
         [
           Choice.new("cliff", "1 Player Start"),
         ],
