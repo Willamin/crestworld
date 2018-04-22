@@ -4,7 +4,11 @@ Stout::Magic.deft
 
 require "./model/*"
 
-database = YAML.parse(File.read({{__DIR__}} + "/../config/database.yml"))["pg"]["database"].as_s
+if ENV["DATABASE_URL"]?
+  database = ENV["DATABASE_URL"]
+else
+  database = YAML.parse(File.read({{__DIR__}} + "/../config/database.yml"))["pg"]["database"].as_s
+end
 
 DB.open database do |db|
   db.exec Game.schema
