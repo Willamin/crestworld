@@ -20,7 +20,7 @@ rescue e : PQ::PQError
   puts "table already exists"
 end
 
-server = Stout::Server.new
+server = Stout::Server.new(use_static: false)
 Game.routes(server)
 Static.routes(server)
 server.default_route = "/"
