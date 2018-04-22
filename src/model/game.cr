@@ -22,6 +22,10 @@ class Game < Granite::ORM::Base
     server.get("/game", &->start(Stout::Context))
     server.get("/game/:game_uuid", :game_show, &->show(Stout::Context))
     server.post("/game/:game_uuid", :game_update, &->update(Stout::Context))
+    server.get("/info") do |context|
+      pp ENV
+      pp Dir.current
+    end
   end
 
   def self.start(context)
