@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crest World</title>
+    <link rel="stylesheet" href="/clean.css"/>
+    <link rel="stylesheet" href="/game.css"/>
+  </head>
+  <body>
+    <main>
+      <div>
+        <h1>Crest World</h1>
+        <p class="description"><%= @description %></p>
+      </div>
+      <div>
+        <form id="game_form" method="POST" action="/game/<%= @uuid%>">
+        <% @choices.each do |choice| %>
+          <input name="choice[<%= choice.id %>]" type="radio" id="choice[<%= choice.id %>]"/>
+          <label for="choice[<%= choice.id %>]" class="button">
+            <%= choice.label %>
+          </label>
+        <% end %>
+        </form>
+      </div>
+    </main>
+    <script type="text/javascript" src="/game.js"></script>
+  </body>
+</html>

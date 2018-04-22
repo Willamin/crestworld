@@ -6,10 +6,12 @@ authors:
 description: |
   CrestWorld is a text-based platforming game.
 
-dependencies:
-  crest:
-    path: ../crest
-
 targets:
   crestworld:
     main: src/crestworld.cr
+
+dependencies:
+  stout:
+    github: willamin/stout
+  pg:
+    github: will/crystal-pg

@@ -1,8 +1,22 @@
-require "crest"
+require "yaml"
+require "stout"
+Stout::Magic.deft
 
-crest = Crest.new
+require "./model/*"
 
-{{ run("#{__DIR__}/yaml_to_nodes.cr") }}
+database = YAML.parse(File.read({{__DIR__}} + "/../config/database.yml"))["pg"]["database"].as_s
 
-crest.current_node = "cliff"
-crest.show
+DB.open database do |db|
+  db.exec Game.schema
+rescue e : PQ::PQError
+  if e.field_message(:code) != "42P07" # duplicate table error
+    raise e
+  end
+
+  puts "table already exists"
+end
+
+server = Stout::Server.new
+Game.routes(server)
+server.default_route = "/"
+server.listen
