@@ -53,9 +53,13 @@ class Game < Granite::ORM::Base
 
     game.data.try do |data|
       data = JSON.parse(data).as_h
-      info = World.info_at(data["position"]?)
+      info = World.info_at(data)
       game.description = info[0]
       game.choices = info[1]
+      if info.is_a?(World::ComplexInfo)
+        game.data = info[2].to_json
+        game.save
+      end
     end
 
     context << game.to_s

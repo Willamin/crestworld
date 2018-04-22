@@ -1,5 +1,9 @@
 module World
-  def self.info_at(position) : Tuple(String, Array(Choice))
+  alias SimpleInfo = Tuple(String, Array(Choice))
+  alias ComplexInfo = Tuple(String, Array(Choice), Hash(String, JSON::Type))
+
+  def self.info_at(data) : SimpleInfo | ComplexInfo
+    position = data["position"]?
     case position
     when ""
       {"", [] of Choice}
@@ -17,6 +21,41 @@ module World
           Choice.new("platform_2b", "Jump to the left"),
         ],
       }
+    when "platform_2a"
+      {
+        "On the far side of this island is a ladder that goes underground. Behind you is a platform that's within jumping distance",
+        [
+          Choice.new("first_platform", "Jump to the platform behind you"),
+          Choice.new("inside_2a", "Climb down the ladder"),
+        ],
+      }
+    when "inside_2a"
+      extra = ""
+      if data["2a_left?"]?
+        extra += " It looks like the left button has been pressed."
+      end
+      {
+        "After climbing down the ladder, you find your self in a small room. There is a small television screen that's been smashed, a control panel with 2 buttons, and an uncomfortable looking chair." + extra,
+        [
+          Choice.new("platform_2a", "Climb back up the ladder"),
+          Choice.new("left_button", "Push the left button"),
+          Choice.new("right_button", "Push the right button"),
+        ],
+      }
+    when "left_button"
+      if data["2a_left?"]?
+        {
+          "It doesn't seem like pressing the button more will have any effect.",
+          [Choice.new("inside_2a", "Continue")],
+        }
+      else
+        data["2a_left?"] = true
+        {
+          "You press the left button. Briefly, the television screen flickers, but goes dim moments later.",
+          [Choice.new("inside_2a", "Continue")],
+          data,
+        }
+      end
     when .nil?, "welcome"
       {
         "Welcome to Crest World, a game created for the 41st Ludum Dare Game Jam. My take on the theme \"combine two incompatible genres\" is a choose-your-own-adventure platformer. <br><br>Have fun!",
