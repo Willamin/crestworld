@@ -22,5 +22,6 @@ end
 
 server = Stout::Server.new
 Game.routes(server)
+Static.routes(server)
 server.default_route = "/"
 server.listen
