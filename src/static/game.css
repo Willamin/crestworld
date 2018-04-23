@@ -23,7 +23,7 @@ main {
   text-align: justify;
 }
 
-input[type=radio] {
+.hidden {
   display: none;
 }
 

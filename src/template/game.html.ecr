@@ -4,6 +4,8 @@
     <title>Crest World</title>
     <link rel="stylesheet" href="/clean.css"/>
     <link rel="stylesheet" href="/game.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.1.1/turbolinks.js"></script>
+    <script type="text/javascript" src="/game.js"></script>
   </head>
   <body>
     <main>
@@ -14,14 +16,16 @@
       <div>
         <form id="game_form" method="POST" action="/game/<%= @uuid%>">
         <% @choices.each do |choice| %>
-          <input name="choice[<%= choice.id %>]" type="radio" id="choice[<%= choice.id %>]"/>
-          <label for="choice[<%= choice.id %>]" class="button">
+          <label class="button" for="<%= choice.id %>">
+            <input type="radio" name="choice" id="<%= choice.id %>" value="<%= choice.id %>"/>
             <%= choice.label %>
           </label>
         <% end %>
+        <noscript>
+          <input type="submit" />
+        </noscript>
         </form>
-      </div>
+      </div> 
     </main>
-    <script type="text/javascript" src="/game.js"></script>
   </body>
 </html>

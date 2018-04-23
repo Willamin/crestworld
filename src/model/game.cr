@@ -69,15 +69,7 @@ class Game < Granite::ORM::Base
 
   def self.update(context)
     uuid = context.params["game_uuid"]?
-    choice = context
-      .params
-      .post_params
-      .try &.as_h
-      .select { |param| param.starts_with?("choice") }
-      .first
-      .first
-      .match(/choice\[(.*)\]/)
-      .try &.[1]
+    choice = context.params["choice"]?.try &.to_s || ""
 
     if uuid.nil?
       return self.start(context)
@@ -96,7 +88,6 @@ class Game < Granite::ORM::Base
 
     context.response.headers["Location"] = "/game/#{uuid}"
     context.response.status_code = 302
-    puts
   rescue e
     pp e
   end

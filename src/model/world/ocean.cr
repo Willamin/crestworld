@@ -1,4 +1,4 @@
-class World::Ocean
+module World::Ocean
   def self.info_at(data) : SimpleInfo | ComplexInfo | Nil
     position = data["position"]?
     case position
