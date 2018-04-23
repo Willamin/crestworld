@@ -28,6 +28,7 @@ main {
 }
 
 .button {
+  width: 300px;
   padding: 0.5em 1em;
   background-color: #007ea7;
   border: 1px solid #35524a;
@@ -40,7 +41,9 @@ main {
   user-select: none;
   margin: 0.5em;
   display: block;
-  max-width: 300px;
+  font-size: 1em;
+  line-height: 1.6em;
+  text-align: left;
 }
 
 .button:hover {
