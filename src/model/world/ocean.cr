@@ -56,6 +56,44 @@ module World::Ocean
           data,
         }
       end
+    when "platform_2b"
+      if data["2a_left?"]?
+        {
+          "A platform floats just out of reach. On it is a pedestal. A short metal bridge juts out from the island towards it. Behind you is another platform.",
+          [
+            Choice.new("first_platform", "Jump on the platform behind you"),
+            Choice.new("third_platform", "Jump to the island with the pedestal."),
+          ],
+        }
+      else
+        {
+          "A platform floats just out of reach. On it is a pedestal. Behind you is another platform.",
+          [
+            Choice.new("death", "Try to jump anyways"),
+            Choice.new("first_platform", "Jump on the platform behind you"),
+          ],
+        }
+      end
+    when "death"
+      {
+        "That jump must've been too far. You fall to your death.",
+        [Choice.new("welcome", "Game Over")],
+      }
+    when "third_platform"
+      {
+        "You land on the platform successfully! In the middle is a pedestal. Behind you is a floating island.",
+        [
+          Choice.new("platform_2b", "Jump to the island behind you."),
+          Choice.new("pedestal", "Examine the pedestal"),
+        ],
+      }
+    when "pedestal"
+      {
+        "You find an inscription on the pedestal. It reads:<quote>I hope you enjoyed this journey. I wanted to keep this short and sweet. No one wants to play a text adventure platformer for too long. Thanks for playing!</quote>",
+        [
+          Choice.new("welcome", "Continue"),
+        ],
+      }
     else
       nil
     end
